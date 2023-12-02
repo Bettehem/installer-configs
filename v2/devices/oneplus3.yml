@@ -9,8 +9,8 @@ user_actions:
     image: "phone_power_down"
     button: true
   reboot_to_recovery:
-    title: "Reboot to Recovery"
-    description: "With the device powered off, press the power button until you see the boot menu and using the volume buttons, select Recovery from the menu and press the power button to confirm"
+    title: "Reboot to Bootloader"
+    description: "With the device powered off, press the power button until you see the boot menu and using the volume buttons, select Fastboot from the menu and press the power button to confirm"
     image: "phone_power_down"
     button: true
   install_recovery:
@@ -28,12 +28,6 @@ user_actions:
   wipe_partitions:
     title: "Wipe partitions"
     description: "In recovery, go to Wipe -> Advanced Wipe, then select everything except Vendor and USB-OTG and then Swipe to Wipe. Now reboot back into recovery."
-  activate_sideload:
-    title: "Activate ADB Sideload"
-    description: "In recovery, go to Advanced -> ADB Sideload, then Swipe to Start Sideload"
-  reboot_to_os:
-    title: "Reboot into Droidian"
-    description: "Reboot your device and wait for Droidian to boot. After seeing the Droidian logo, the screen will go black for 20-30 seconds. Do NOT press the power button during this period or the device will power off. Just wait patiently and you will be greeted with the Phosh lock screen when booting is done."
 unlock:
   - "bootloader"
   - "install_recovery"
@@ -59,7 +53,6 @@ operating_systems:
               group: "firmware"
               files:
                 - url: "https://images.droidian.org/droidian/nightly/arm64/oneplus/image-fastboot-oneplus3.zip"
-                - name: "droidian-OFFICIAL-oneplus3-nightly.zip"
         condition:
           var: "variant"
           value: "phosh"
@@ -70,13 +63,7 @@ operating_systems:
           - core:user_action:
               action: "reboot_to_recovery"
       - actions:
-          - core:user_action:
-              action: "activate_sideload"
-      - actions:
           - adb:sideload:
-                file: "droidian-OFFICIAL-oneplus3-nightly.zip"
+                file: "image-fastboot-oneplus3.zip"
                 group: "firmware"
-      - actions:
-        - core:user_action:
-            action: "reboot_to_os"
     slideshow: []
